@@ -1,1 +1,27 @@
+$token = '0e92735080ba6acd73d407758057c2972f99ca91' --> Aquí he puesto el token generado en GitHub.
 
+$crud->get($url, $token); -> Creo el crud pasandole la url 'https://api.github.com/user/repos' y el token
+
+public function get($url, $token){
+    $sesion = curl_init($url); //  inicializar una sesión cURL  
+    // establecer todas las opciones para la transferencia con curl_setopt
+     curl_setopt($sesion, CURLOPT_CUSTOMREQUEST, "GET");   // Recibe el método ( GET || PUT || POST || DELETE )                                                          
+     curl_setopt($sesion, CURLOPT_RETURNTRANSFER, true);  
+     curl_setopt($sesion, CURLOPT_SSL_VERIFYPEER, false);
+     curl_setopt($sesion, CURLOPT_HTTPHEADER, array(
+         "User-Agent: php-curl",
+         "Authorization: token ".$token,
+         "Content-Length: 0"));
+     $result = curl_exec($sesion); // Ejecuta la sesión cURL que se le pasa como parámetro.
+     return $result;
+}
+
+json_decode($result) -> Decodifica el string de JSON
+
+https://api.github.com/repos/sandraperez93/pr10/commits --> Esta es la URL que paso para sacar los commits, donde pr10 puede variar.
+
+$repositori->commit->author->name; -> Saco el nombre de quien ha hecho el commit.
+$repositori->commit->committer->date; -> Saco la fecha de cuando se ha hecho el commit.
+$repositori->commit->message; -> Saco el título del commit.
+
+https://api.github.com/repos/sandraperez93/pr10/readme --> Esta es la URL que paso para sacar el contenido del README si lo hay, donde pr10 puede variar.
