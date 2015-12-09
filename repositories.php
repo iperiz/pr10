@@ -1,11 +1,11 @@
 <?php
 include_once 'curl.php';
 
-$token = 'b593d5e843c65c79f907179edf0bfc6f78d30243'; // Token generado
+$token = '2cf6a732b211c519ecf248b0f524bf5733347544'; // Token generado
 $url = 'https://api.github.com/user/repos';
 $crud = new curl;
 $result = $crud->get($url, $token);
-$resultado_json = (json_decode($result));
+$resultado_json = (json_decode($result)); // Decodifica un string de JSON
 
 if ((isset($_REQUEST['repositori']))) {
     echo '<h1 style="color: purple">' . $_REQUEST['repositori'] . ' de ' . $_REQUEST['user'] . '</h1>';
@@ -13,7 +13,6 @@ if ((isset($_REQUEST['repositori']))) {
     $url_commits = 'https://api.github.com/repos/' . $_REQUEST['user'] . '/' . $_REQUEST['repositori'] . '/commits';
     $result = $crud->get($url_commits, $token);
     $resultado_json = (json_decode($result));
-    //print_r($resultado_json);
 
     foreach ($resultado_json as $repositori) {
         echo '<br>AUTOR: ' . $repositori->commit->author->name;
@@ -22,10 +21,9 @@ if ((isset($_REQUEST['repositori']))) {
         echo '<br>';
     }
 
-    $url_readme = 'https://api.github.com/repos/' . $_REQUEST['user'] . '/' . $_REQUEST['repositori'] . '';
+    $url_readme = 'https://api.github.com/repos/' . $_REQUEST['user'] . '/' . $_REQUEST['repositori'] . '/readme/readme';
     $result = $crud->get($url_readme, $token);
     $resultado_json2 = (json_decode($result));
-    //print_r($resultado_json2);
 
     if (isset($resultado_json2->content)) {
         echo base64_decode($resultado_json2->content);
@@ -46,17 +44,12 @@ if ((isset($_REQUEST['repositori']))) {
 
 <html>
     <head>
-        <title>Practica 10</title>
-        <link rel="stylesheet" href="css/CSSpr10.css">
-
+        <title>PR 10</title>
         <style>
             a{
                 text-decoration: none;
                 color: black;
             }
-
-
-
         </style>
     </head>
 </html>
