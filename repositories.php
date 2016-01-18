@@ -1,7 +1,7 @@
 <?php
 include_once 'curl.php';
 
-$token = '2cf6a732b211c519ecf248b0f524bf5733347544'; // Token generado
+$token = '24ab75a630bafe1f4234508bbd5c7b6d4d0bce7e'; // Token generado
 $url = 'https://api.github.com/user/repos';
 $crud = new curl;
 $result = $crud->get($url, $token);
@@ -29,10 +29,10 @@ if ((isset($_REQUEST['repositori']))) {
         echo base64_decode($resultado_json2->content);
     }
 } else {
-    echo '<h1 style="color: purple;">Repositori de sandraperez93</h1>';
+    echo '<h1 style="color: purple;">Repositori de iperiz</h1>';
     $contador = 0;
     foreach ($resultado_json as $repositori) {
-        if ($repositori->owner->login == 'sandraperez93') {
+        if ($repositori->owner->login == 'iperiz') {
             $contador++;
             echo '<a href="?repositori=' . $repositori->name . '&user=' . $repositori->owner->login . '">' . $contador . '. ' . $repositori->name . '<a/>';
             echo '<br>';
